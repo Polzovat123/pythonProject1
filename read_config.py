@@ -39,7 +39,7 @@ def get_HEADERS():
 #text
 def get_teg_header_1():
     a = []
-    f = open('text_link/atribute_for_news/tag_header_1.txt', 'r')
+    f = open('text_links/news/tag_1.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -47,7 +47,7 @@ def get_teg_header_1():
 
 def get_tag_text_2():
     a = []
-    f = open('text_link/atribute_for_news/tag_text_2.txt', 'r')
+    f = open('text_links/news/tag_2.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -55,7 +55,7 @@ def get_tag_text_2():
 
 def get_class_text_1():
     a = []
-    f = open('text_link/atribute_for_news/class_text_1.txt', 'r')
+    f = open('text_links/news/class_1.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -63,7 +63,7 @@ def get_class_text_1():
 
 def get_class_text_2():
     a = []
-    f = open('text_link/atribute_for_news/class_text_2.txt', 'r')
+    f = open('text_links/news/class_2.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -72,7 +72,7 @@ def get_class_text_2():
 #link
 def get_teg_link_1():
     a = []
-    f = open('text_link/atrbute_for_link/tag_title.txt', 'r')
+    f = open('text_links/link_news/tag_1.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -80,7 +80,7 @@ def get_teg_link_1():
 
 def get_teg_link_2():
     a = []
-    f = open('text_link/atrbute_for_link/tag_title_1.txt', 'r')
+    f = open('text_links/link_news/tag_2.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -88,7 +88,7 @@ def get_teg_link_2():
 
 def get_class_link_1():
     a = []
-    f = open('text_link/atrbute_for_link/class_title.txt', 'r')
+    f = open('text_links/link_news/class_1.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -96,16 +96,25 @@ def get_class_link_1():
 
 def get_class_link_2():
     a = []
-    f = open('text_link/atrbute_for_link/class_title_2.txt', 'r')
+    f = open('text_links/link_news/class_2.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
     return a
 
+def get_atribute_for_get():
+    a = []
+    f = open('text_links/link_news/atribute_1.txt', 'r')
+    for line in f:
+        a.append(line)
+    a = [line.rstrip() for line in a]
+    return a
+    pass
+
 #header
 def get_teg_head_1():
     a = []
-    f = open('text_link/atribute_for_header/tag_title.txt', 'r')
+    f = open('text_links/header/tag_1.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -113,7 +122,7 @@ def get_teg_head_1():
 
 def get_teg_head_2():
     a = []
-    f = open('text_link/atribute_for_header/tag_title_1.txt', 'r')
+    f = open('text_links/header/tag_2.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -121,7 +130,7 @@ def get_teg_head_2():
 
 def get_class_head_1():
     a = []
-    f = open('text_link/atribute_for_header/class_title.txt', 'r')
+    f = open('text_links/header/class_1.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
@@ -129,22 +138,13 @@ def get_class_head_1():
 
 def get_class_head_2():
     a = []
-    f = open('text_link/atribute_for_header/class_title_2.txt', 'r')
+    f = open('text_links/header/class_2.txt', 'r')
     for line in f:
         a.append(line)
     a = [line.rstrip() for line in a]
     return a
 
 #other
-def get_atribute_for_get():
-    a = []
-    f = open('text_link/atrbute_for_link/atribute_name.txt', 'r')
-    for line in f:
-        a.append(line)
-    a = [line.rstrip() for line in a]
-    return a
-    pass
-
 def show_i_n_l_t(a, b, c, d):
     show_link(a)
     show_link(b)

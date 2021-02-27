@@ -22,6 +22,7 @@ tag_title_1 = get_teg_head_1()
 tag_title_2 = get_teg_head_2()
 class_title_1 = get_class_head_1()
 class_title_2 = get_class_head_2()
+print(tag_title_1)
 #for link
 tag_link_1 = get_teg_link_1()
 tag_link_2 = get_teg_link_2()
@@ -127,7 +128,8 @@ def get_text_newq(link, num):
         news = get_news(url.text, tag_1=tag_text_1[num], class_1=class_text_1[num], tag_2=tag_text_2[num], class_2=class_text_2[num])
         return news
     else:
-        print("We can`t open link:"+url)
+        print("We can`t open link:"+str(url))
+        print(link)
         return ""
 
 def get_text_news(url_l, num=0):
@@ -140,7 +142,7 @@ def parse(url, num=0):
     html = get_html(url)
     if html.status_code ==200:
         news_head = get_header_news(html.text, num, tag_title_1[num], class_title_1[num], tag_title_2[num], class_title_2[num])
-        show_list_dict(news_head)
+        #show_list_dict(news_head)
         news_link = get_link_news(html.text, num, tag_link_1[num], class_link_1[num], tag_link_2[num], class_link_2[num], atribute_for_get[num])
         #show_list_dict(news_link)
         news_text = get_text_news(news_link, num)
@@ -165,6 +167,7 @@ def main_function():
         #write_data(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
         write_first_data(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
         #write_all_config_end_itteration(time_starrt, sch)
+        print('Time: ' + time_starrt)
         time.sleep(time_sleep)
         time_starrt = get_time()
     pass
