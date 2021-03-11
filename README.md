@@ -7,7 +7,7 @@ Now that write when was last get info
 # other variables
 sch
 #sys file
-
+connector-auto - connection link <br>
 standart info 
 you must write in  acsses.txt and text_link. 
 you can change or add new website

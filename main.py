@@ -22,7 +22,7 @@ tag_title_1 = get_teg_head_1()
 tag_title_2 = get_teg_head_2()
 class_title_1 = get_class_head_1()
 class_title_2 = get_class_head_2()
-print(tag_title_1)
+#print(tag_title_1)
 #for link
 tag_link_1 = get_teg_link_1()
 tag_link_2 = get_teg_link_2()
