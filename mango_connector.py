@@ -31,31 +31,38 @@ def work(socket):
         "medicine" : 1
     })
 
-def write_in_mongodb(socket, l_1, l_2, l_3, l_4, atr):
+def write_in_mongodb(socket, a_index,l_1, l_2, l_3, l_4, atr):
     db = socket.dataset
     news = db.news
+    print(atr)
     for i in range(len(l_1)):
         news.insert_one({
-        "_id": l_1[i],
-        "news_header": l_2[i],
-        "link": l_3[i],
-        "text": l_4[i],
-        "atribute": {atr}
+        "_id": a_index[i],
+        "title": l_1[i],
+        "link": l_2[i],
+        "source": l_3[i],
+        "image": l_4,
+        "atribute": {
+            "politic":atr['politic'],
+            "medicine":atr['medicine'],
+            "education":0
+        }
         })
 
-def connect_and_push_to_dataset_data(l_1, l_2, l_3, l_4, l_5):
+def connect_and_push_to_dataset_data(title, id, link, source, image, dict_atr):
     socket = pymongo.MongoClient(get_string())
     try:
         print('Start first epoch')
         print("MongoDB version is %s" %
               socket.server_info()['version'])
-        write_in_mongodb(l_1, l_2, l_3, l_4, l_5)
+        write_in_mongodb(socket, id, title, link, source, image, dict_atr)
     except pymongo.errors.OperationFailure as error:
         print(error)
         quit(1)
 
 def connect_and_write_from_NN():
     print(get_string())
+    return;
     socket = pymongo.MongoClient(get_string())
     try:
         print('Start first epoch')
@@ -67,7 +74,7 @@ def connect_and_write_from_NN():
         quit(1)
     pass
 
-
+connect_and_write_from_NN()
 #
 #gw%KR$V8S%#?BZS3JBhX544*8m8S^AVXd5Cp3UY@N2EbPCK*eywWFNhE^yE2K2MvuBDSjyPGd_Fv@Vk=3QkyF+Uy2VXFgtRXBwGF$r8-&TH+mk
 #

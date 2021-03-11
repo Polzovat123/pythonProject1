@@ -2,10 +2,18 @@ import requests
 from file_manager import *
 from bs4 import BeautifulSoup
 from read_config import *
+from create_new_push import add_dictionary
 
+
+f = open("sys_file/sch.txt", 'r')
+if f!= 0 :
+    sch = int(f.read())
+else:
+    sch = 1
+f.close()
 
 have_file=0
-sch=1
+
 #print(sch)
 #print(type(sch))
 l_URL = get_l_URL()
@@ -145,9 +153,11 @@ def parse(url, num=0):
         #show_list_dict(news_head)
         news_link = get_link_news(html.text, num, tag_link_1[num], class_link_1[num], tag_link_2[num], class_link_2[num], atribute_for_get[num])
         #show_list_dict(news_link)
-        news_text = get_text_news(news_link, num)
+        #news_text = get_text_news(news_link, num)
         #show_list_dict_all(news_head, news_link, news_text)
-        add_big_dictionary(news_head, news_link, news_text)
+        #add_big_dictionary(news_head, news_link, news_text)
+        global sch
+        sch = add_dictionary(sch, news_head, news_link, url)
     else:
         print('Error, we can`t open web site')
 
@@ -155,6 +165,10 @@ def parse_all_web_site():
     for i in range(len(l_URL)):
         parse(l_URL[i], i)
     print('all data reads and end sucsesful')
+
+def save_sch(x):
+    f = open("sys_file/sch.txt", 'w')
+    f.write(str(x))
 
 def main_function():
     while True:
@@ -165,8 +179,9 @@ def main_function():
         #info(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
         #show_i_n_l_t(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
         #write_data(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
-        write_first_data(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
+        #write_first_data(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
         #write_all_config_end_itteration(time_starrt, sch)
+        save_sch(sch)
         print('Time: ' + time_starrt)
         time.sleep(time_sleep)
         time_starrt = get_time()
