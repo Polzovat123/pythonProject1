@@ -3,6 +3,10 @@ from file_manager import *
 from bs4 import BeautifulSoup
 from read_config import *
 from create_new_push import add_dictionary
+import requests
+from io import BytesIO
+from bs4 import BeautifulSoup
+
 
 
 f = open("sys_file/sch.txt", 'r')
@@ -20,11 +24,11 @@ l_URL = get_l_URL()
 names_sources = get_names_sourcese()
 time_starrt = get_time()
 HEADERS = get_HEADERS()
-time_sleep = int(3600)
+time_sleep = int(36)
 INDEX = []
 NAME_NEWS = []
 LINK = []
-TEXT_NEWS = []
+IMAGE = []
 #for title
 tag_title_1 = get_teg_head_1()
 tag_title_2 = get_teg_head_2()
@@ -106,7 +110,7 @@ def add_big_dictionary(object_1, object_2, object_3):
         sch+=1
         NAME_NEWS.append(object_1[i]['title'])
         LINK.append(object_2[i]['link'])
-        TEXT_NEWS.append(object_3[i])
+        IMAGE.append(object_3[i])
 
 def get_news(html, tag_1='', class_1='', tag_2 ='', class_2=''):
     c = BeautifulSoup(html, 'html.parser')
@@ -146,13 +150,37 @@ def get_text_news(url_l, num=0):
         text_news.append(get_text_newq(url_l[i].get('link'), num))
     return text_news
 
+'''def url_to_image(url, filename):
+    # get HTTP response, open as bytes, save the image
+    # http://docs.python-requests.org/en/master/user/quickstart/#binary-response-content
+    req = requests.get(url)
+    i = Image.open(BytesIO(req.content))
+    i.save(filename)'''
+
+'''def get_image_link(html, num=0,  tag_1='', class_1='', tag_2 ='', class_2='', get_atribute=''):
+    soup = BeautifulSoup(html, 'html.parser')
+    urls = []
+    for img in soup.find_all("img"):
+        if img["src"].endswith("jpg"):
+            print("endswith jpg")
+            urls.append(str(img["src"]))
+            print(str(img))
+
+    jpeg_no = 00
+    for url in urls:
+        url_to_image(url, filename="NatGeoPix/" + str(jpeg_no) + ".jpg")
+        jpeg_no += 1
+    return img_link'''
+
 def parse(url, num=0):
     html = get_html(url)
     if html.status_code ==200:
         news_head = get_header_news(html.text, num, tag_title_1[num], class_title_1[num], tag_title_2[num], class_title_2[num])
-        #show_list_dict(news_head)
+        show_list_dict(news_head)
         news_link = get_link_news(html.text, num, tag_link_1[num], class_link_1[num], tag_link_2[num], class_link_2[num], atribute_for_get[num])
-        #show_list_dict(news_link)
+        show_list_dict(news_link)
+        #image_link = get_image_link(html.text, num, tag_text_1[num], class_text_1[num], tag_text_2[num], class_text_2[num], get_atribute='srcset')
+        #show_list_dict(image_link)
         #news_text = get_text_news(news_link, num)
         #show_list_dict_all(news_head, news_link, news_text)
         #add_big_dictionary(news_head, news_link, news_text)
@@ -176,11 +204,6 @@ def main_function():
         print('Time: ' + time_starrt)
         parse_all_web_site()
         print('Start pause')
-        #info(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
-        #show_i_n_l_t(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
-        #write_data(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
-        #write_first_data(INDEX, NAME_NEWS, LINK, TEXT_NEWS)
-        #write_all_config_end_itteration(time_starrt, sch)
         save_sch(sch)
         print('Time: ' + time_starrt)
         time.sleep(time_sleep)

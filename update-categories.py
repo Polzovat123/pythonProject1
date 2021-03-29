@@ -6,8 +6,8 @@ def worki(socket, i ,s):
     db = socket.cat
     main= db.main
     main.insert_one({
-        "_id": i,
-        "name":s
+        "_id": 5,
+        "name":'Technology'
     })
 
 def work(socket):

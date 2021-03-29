@@ -49,7 +49,7 @@ def add_to_text_link_to_atribute_for_news():
 
 #fucntion_to_change
 def add_new_element(path, var):
-    f = open(path, 'a')
+    f = open(path, 'w')
     f.write(var+'\n')
     f.close()
 

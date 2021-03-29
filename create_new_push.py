@@ -28,7 +28,7 @@ def add_dictionary(number_start, new_title, new_link, url_sourse):
             old_url_source.append(url_sourse)
             number_start+=1
 
-    print()
+    print('1111')
     print(generate_id(s, number_start))
     use_mango_connector(push_title, push_link, push_source, id=generate_id(s, number_start))
     if counter%9==0:

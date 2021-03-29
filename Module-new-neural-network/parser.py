@@ -8,6 +8,8 @@ HEADERS = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/5
 new_url = []
 nn_url = []
 last_url = []
+text = []
+k = 1
 
 def get_html(url, params=None):
     l = requests.get(url, headers=HEADERS, params=params)
@@ -36,48 +38,76 @@ def parse_link_3(html_file):
 
     link = BeautifulSoup(html_file, 'html.parser')
     gifts = link.find_all("li")
-    print(gifts)
+    #print(gifts)
+
     for i in gifts:
-        if i.find("a"):
-            last_url.append('https://ru.wikipedia.org/'+ i.find('a').get('href'))
+        if i.find("a", class_='mw-redirect'):
+            last_url.append('https://ru.wikipedia.org/'+ i.find('a', class_='mw-redirect').get('href'))
 
 def parse_content(html_file):
     link = BeautifulSoup(html_file, 'html.parser')
     gifts = link.find_all("p")
 
     for i in gifts:
-        if i.find():
-            nn_url.append(gifts.get())
+        if i.get_text():
+            text.append(i.get_text())
+        if i.find("a"):
+            text.append(i.find("a").get_text())
+    #print(text)
+    wrire_data()
+    #print(text)
+    text.clear()
+    #print(k)
+
+def clear_word(word):
+    n_word = ""
+    for c in range(0, len(word)):
+        #print(word[c])
+        if (word[c]>='а' and word[c]<='я') or (word[c]>='А' and word[c]<='Я'):
+            n_word = n_word + word[c]
+        if word[c] == ' ':
+            n_word = n_word + ' '
+        #print(n_word)
+    n_word = n_word + ' '
+    return n_word.lower()
+
+def wrire_data():
+    f = open('data/main.txt', 'a')
+    for word in range(len(text)):
+        text[word] = clear_word(text[word])
+        f.write(str(text[word])+'\n')
+
 
 def start_farming_data():
+    global k
     for url in l_url:
         l = get_html(url)
-        #print(l)
         if l.status_code==200:
-            #print(l.text)
             parse_link_1(l.text)
-
+    print("step one")
     #Now we parse next sloi
 
     for url in new_url:
         link = get_html(url)
         if link.status_code == 200:
             parse_link_2(link.text)
-        break
     print("All complete")
 
     #Now we write se
-    print(nn_url)
+    #print(nn_url)
     for url in nn_url:
         link = get_html(url)
         if link.status_code == 200:
             parse_link_3(link.text)
-        break
-    print(last_url)
+    #print(last_url)
+    print('step 3')
     #now we parse text
+
     for url in last_url:
         link = get_html(url)
         if link.status_code == 200:
             parse_content(link.text)
+        k+=1
+
 
 start_farming_data()

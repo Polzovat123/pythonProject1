@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 import pymongo
 
 def get_autorizate_key():
@@ -19,33 +20,32 @@ def get_string():
 def work(socket):
     db = socket.dataset
     news = db.news
-    c = news.find()
-    for item in c:
-        print(item)
-    news.insert_one({
-        "_id": 0,
-        "news": "War never changes",
-        "link": "https://www.bbc.com/russian/news-56196846",
-        "text": "",
-        "politic" : 0,
-        "medicine" : 1
-    })
+    '''news.insert_one({
+        "_id": 1,
+        "title": '"Эвер Гивен" в Суэцком канале: владельцы надеются снять судно с мели, но на это могут уйти недели',
+        "source": {
+            "name": 'BBC',
+            "icon": "Not found"
+        },
+        "link": "https://www.bbc.com/russian/news-56548050",
+        "text": [0.12860646148, 1.930288097, -1.08119, 1.54445]
+    })'''
+    print('end')
 
 def write_in_mongodb(socket, a_index,l_1, l_2, l_3, l_4, atr):
     db = socket.dataset
     news = db.news
-    print(str(l_1[0]))
     for i in range(len(l_1)):
         news.insert_one({
-        "_id": str(a_index[i]),
+        "_id": a_index[i],
         "title": str(l_1[i]['title']),
         "link": str(l_2[i]['link']),
         "source": {
-            "name":l_3,
+            "name": l_3[i],
             "icon":"Nan"
         },
         "image": str(l_4),
-        "atribute": atr
+        "atribute": atr[i]
         })
 
 def connect_and_push_to_dataset_data(title, id, link, source, image, dict_atr):
@@ -60,8 +60,6 @@ def connect_and_push_to_dataset_data(title, id, link, source, image, dict_atr):
         quit(1)
 
 def connect_and_write_from_NN():
-    print(get_string())
-    return;
     socket = pymongo.MongoClient(get_string())
     try:
         print('Start first epoch')
